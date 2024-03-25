@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: blogs
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_blogs?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
