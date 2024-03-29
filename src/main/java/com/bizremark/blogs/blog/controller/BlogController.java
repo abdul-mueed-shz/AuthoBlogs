@@ -4,7 +4,6 @@ import com.bizremark.blogs.blog.dto.BlogDto;
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogDtoMapper;
-import com.bizremark.blogs.blog.model.entity.Blog;
 import com.bizremark.blogs.blog.service.BlogService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

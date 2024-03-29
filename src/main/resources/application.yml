@@ -9,3 +9,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  servlet:
+    multipart:
+      #      max-file-size: 128KB
+      #      max-request-size: 128KB
+      location: static/media/blog_attachment
+      enabled: true
