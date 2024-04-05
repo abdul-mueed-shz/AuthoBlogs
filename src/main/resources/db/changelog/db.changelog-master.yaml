@@ -18,7 +18,7 @@ databaseChangeLog:
                   type: varchar(255)
               - column:
                   name: description
-                  type: varchar(255)
+                  type: varchar(5000)
               - column:
                   name: created_on
                   type: timestamp

@@ -12,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class BlogInfo {
-    private Long id;
     private String title;
     private String description;
     private Category category;

@@ -36,4 +36,17 @@ public class BlogController {
         BlogInfo blogInfo = blogDtoMapper.blogDtoToBlogInfo(blogDto);
         blogService.createBlog(blogInfo, blogDto.getThumbnail());
     }
+
+    @DeleteMapping(path = "{blogId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteBlog(@PathVariable("blogId") Long blogId) {
+        blogService.deleteBlog(blogId);
+    }
+
+    @PutMapping(path = "{blogId}", consumes = "multipart/form-data")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void updateBlog(@PathVariable("blogId") Long blogId, @Valid @ModelAttribute BlogDto blogDto) {
+        BlogInfo blogInfo = blogDtoMapper.blogDtoToBlogInfo(blogDto);
+        blogService.updateBlog(blogId, blogInfo, blogDto.getThumbnail());
+    }
 }

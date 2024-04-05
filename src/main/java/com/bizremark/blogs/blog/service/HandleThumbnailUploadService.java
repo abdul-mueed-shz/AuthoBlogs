@@ -63,4 +63,14 @@ public class HandleThumbnailUploadService implements HandleFileUpload {
                         .toString()
                         .replace("\\", "/"));
     }
+
+    public Boolean deleteFile(String absoluteFilePath){
+        try {
+            Path path = Paths.get(absoluteFilePath);
+            Files.deleteIfExists(path);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }

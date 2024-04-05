@@ -24,6 +24,5 @@ public class BlogDto {
     @Size(max = 2000, message = "Description must be of less than 2000 characters")
     private String description;
 
-    @NotNull(message = "thumbnail is required")
     private MultipartFile thumbnail;
 }

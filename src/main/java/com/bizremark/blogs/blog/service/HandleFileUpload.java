@@ -7,4 +7,5 @@ public interface HandleFileUpload {
 
     String getFileUrl(Long id, String fileName);
 
+    Boolean deleteFile(String absoluteFilePath);
 }
