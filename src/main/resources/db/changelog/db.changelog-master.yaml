@@ -160,3 +160,17 @@ databaseChangeLog:
                   name: name
                   value: Travel
 
+  - changeSet:
+      id: 5
+      author: Abdul Mueed Shahbaz
+      changes:
+        - addColumn:
+            tableName: blog
+            columns:
+              - column:
+                  name: thumbnail_path
+                  type: varchar(2000)
+
+              - column:
+                  name: absolute_thumbnail_path
+                  type: varchar(2000)

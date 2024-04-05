@@ -30,10 +30,10 @@ public class BlogController {
         return ResponseEntity.ok(blogService.getBlog(blogId));
     }
 
-    @PostMapping
+    @PostMapping(consumes = "multipart/form-data")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void createBlog(@Valid @RequestBody BlogDto blogDto) {
+    public void createBlog(@Valid @ModelAttribute BlogDto blogDto) {
         BlogInfo blogInfo = blogDtoMapper.blogDtoToBlogInfo(blogDto);
-        blogService.createBlog(blogInfo);
+        blogService.createBlog(blogInfo, blogDto.getThumbnail());
     }
 }

@@ -19,4 +19,5 @@ public class BlogResponse {
     private LocalDateTime createdOn;
     private LocalDateTime modifiedOn;
     private Category category;
+    private String thumbnailPath;
 }

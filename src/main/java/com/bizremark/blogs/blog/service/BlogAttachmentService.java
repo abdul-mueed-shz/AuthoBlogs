@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @Service
 @RequiredArgsConstructor
 public class BlogAttachmentService {
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${app.upload.base-folder}")
     private String uploadLocation;
 
     public void uploadFile(MultipartFile file) {

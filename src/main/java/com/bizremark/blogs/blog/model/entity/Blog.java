@@ -36,5 +36,11 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false) // Foreign key
     private Category category;
+
+    @Column(name="absolute_thumbnail_path")
+    private String absolutePath;
+
+    @Column(name="thumbnail_path")
+    private String thumbnailPath;
 }
 

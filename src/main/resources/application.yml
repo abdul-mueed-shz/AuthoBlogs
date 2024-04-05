@@ -1,3 +1,5 @@
+server:
+  port: 8092
 spring:
   application:
     name: blogs
@@ -9,9 +11,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    showSql: true
   servlet:
     multipart:
       #      max-file-size: 128KB
       #      max-request-size: 128KB
-      location: static/media/blog_attachment
       enabled: true
+
+app:
+  upload:
+    base-folder: "public"
+    thumbnail-location: "uploads/thumbnails"

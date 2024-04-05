@@ -32,9 +32,10 @@ public class BlogDao {
         return blog.map(blogInfoMapper::blogToBlogResponse).orElse(null);
     }
 
-    public void createBlog(BlogInfo blogInfo) {
+    public Long createBlog(BlogInfo blogInfo) {
         Blog blog = blogInfoMapper.blogInfoToBlog(blogInfo);
         blog = blogRepository.save(blog);
+        return blog.getId();
     }
 
 }

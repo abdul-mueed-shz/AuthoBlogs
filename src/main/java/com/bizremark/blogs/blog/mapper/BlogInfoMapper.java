@@ -17,4 +17,6 @@ public interface BlogInfoMapper {
     List<BlogResponse> blogListToBlogResponseList(List<Blog> blogList);
 
     BlogResponse blogToBlogResponse(Blog blog);
+
+    Blog blogResponseToBlog(BlogResponse blog);
 }
