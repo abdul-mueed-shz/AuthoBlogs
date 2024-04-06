@@ -4,14 +4,18 @@ spring:
   application:
     name: blogs
   datasource:
-    url: jdbc:mysql://localhost:3306/spring_blogs?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/spring_blog
+    #    ?createDatabaseIfNotExist=true # Works for sql and some other databases
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: none
     showSql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   servlet:
     multipart:
       #      max-file-size: 128KB

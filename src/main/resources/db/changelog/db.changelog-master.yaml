@@ -3,6 +3,8 @@ databaseChangeLog:
       id: 1
       author: Abdul Mueed Shahbaz
       changes:
+        - createSequence:
+            sequenceName: blog_id_seq
         - createTable:
             tableName: blog
             columns:
@@ -12,7 +14,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    autoIncrement: true
+                  defaultValueSequenceNext: blog_id_seq
               - column:
                   name: title
                   type: varchar(255)
@@ -32,6 +34,8 @@ databaseChangeLog:
       id: 2
       author: Abdul Mueed Shahbaz
       changes:
+        - createSequence:
+            sequenceName: categories_id_seq
         - createTable:
             tableName: categories
             columns:
@@ -41,7 +45,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    autoIncrement: true
+                  defaultValueSequenceNext: categories_id_seq
               - column:
                   name: name
                   type: varchar(255)

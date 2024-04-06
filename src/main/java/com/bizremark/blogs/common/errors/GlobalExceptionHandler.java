@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -46,7 +47,7 @@ public class GlobalExceptionHandler {
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value()); // 500 status code
         body.put("error", "Internal Server Error");
-        body.put("message", "An unexpected error occurred. Please try again later.");
+        body.put("message", !Objects.isNull(ex.getMessage()) ? ex.getMessage() : "An unexpected error occurred. Please try again later.");
         body.put("path", request.getContextPath());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
