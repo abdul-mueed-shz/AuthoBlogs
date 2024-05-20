@@ -17,18 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserJpaRepository userJpaRepository;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> userJpaRepository
-                .findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
-    }
+    private final UserDetailService userDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }

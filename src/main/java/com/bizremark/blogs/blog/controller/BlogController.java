@@ -5,6 +5,7 @@ import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogDtoMapper;
 import com.bizremark.blogs.blog.service.BlogService;
+import com.bizremark.blogs.common.config.UserDetailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 public class BlogController {
     private final BlogService blogService;
     private final BlogDtoMapper blogDtoMapper;
+    private final UserDetailService userDetailService;
 
     @GetMapping
     public ResponseEntity<List<BlogResponse>> getBlogs() {
