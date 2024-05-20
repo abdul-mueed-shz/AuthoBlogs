@@ -183,8 +183,10 @@ databaseChangeLog:
       id: 6
       author: Abdul Mueed Shahbaz
       changes:
+        - createSequence:
+            sequenceName: blog_user_seq
         - createTable:
-            tableName: blog-user
+            tableName: blog_user
             columns:
               - column:
                   name: id
@@ -192,7 +194,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    autoIncrement: true  # Assuming auto-increment is used; if using a sequence, replace with defaultValueSequenceNext
+                  defaultValueSequenceNext: blog_user_seq
               - column:
                   name: email
                   type: varchar(255)

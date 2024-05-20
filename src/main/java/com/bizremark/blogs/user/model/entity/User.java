@@ -14,10 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "blog-user")
+@Table(name = "blog_user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_user_seq")
+    @SequenceGenerator(name = "blog_user_seq", sequenceName = "blog_user_seq", allocationSize = 1)
     private Integer id;
     private String email;
     private String firstName;
