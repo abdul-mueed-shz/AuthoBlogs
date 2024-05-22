@@ -5,9 +5,11 @@ import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
 import com.bizremark.blogs.blog.model.dao.BlogDao;
 import com.bizremark.blogs.category.model.dao.CategoryDao;
+import com.bizremark.blogs.common.dto.PageRequestDto;
 import com.bizremark.blogs.user.info.LoggedInUserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContextException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,12 +28,12 @@ public class BlogService {
 
     private final HandleFileUpload handleThumbnailUploadService;
 
-    public List<BlogResponse> getBlogs() {
-        return blogDao.getAllBlogs();
+    public Page<BlogResponse> getBlogs(PageRequestDto pageRequestDto) {
+        return blogDao.getAllBlogs(pageRequestDto);
     }
 
-    public List<BlogResponse> getUserBlogs(String username) {
-        return blogDao.getUserBlogs(username);
+    public Page<BlogResponse> getUserBlogs(String username, PageRequestDto pageRequestDto) {
+        return blogDao.getUserBlogs(username, pageRequestDto);
     }
 
     public BlogResponse getBlog(Long blogId) {

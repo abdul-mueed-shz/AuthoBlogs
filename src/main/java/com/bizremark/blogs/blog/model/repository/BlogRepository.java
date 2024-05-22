@@ -2,16 +2,18 @@ package com.bizremark.blogs.blog.model.repository;
 
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
+import com.bizremark.blogs.common.dto.PageRequestDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface BlogRepository {
     Boolean blogExists(Long id);
 
-    List<BlogResponse> getAllBlogs();
+    Page<BlogResponse> getAllBlogs(PageRequestDto pageRequestDto);
 
-    List<BlogResponse> getUserBlogs(String username);
-    
+    Page<BlogResponse> getUserBlogs(String username, PageRequestDto pageRequestDto);
+
     BlogResponse getBlog(Long id);
 
     Long createBlog(BlogInfo blogInfo);

@@ -7,10 +7,12 @@ import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogDtoMapper;
 import com.bizremark.blogs.blog.service.BlogService;
 import com.bizremark.blogs.common.config.UserDetailService;
+import com.bizremark.blogs.common.dto.PageRequestDto;
 import com.bizremark.blogs.user.info.LoggedInUserInfo;
 import com.bizremark.blogs.user.mapper.LoggedInUserMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +29,14 @@ public class BlogController {
     private final LoggedInUserMapper loggedInUserMapper;
 
     @GetMapping
-    public ResponseEntity<List<BlogResponse>> getBlogs() {
-        return ResponseEntity.ok(blogService.getBlogs());
+    public ResponseEntity<Page<BlogResponse>> getBlogs(PageRequestDto pageRequestDto) {
+        return ResponseEntity.ok(blogService.getBlogs(pageRequestDto));
     }
 
     @GetMapping(path = Endpoints.USER_BLOGS)
-    public ResponseEntity<List<BlogResponse>> getUserBlogs(@PathVariable("username") String username) {
-        return ResponseEntity.ok(blogService.getUserBlogs(username));
+    public ResponseEntity<Page<BlogResponse>> getUserBlogs(@PathVariable("username") String username,
+                                                           PageRequestDto pageRequestDto) {
+        return ResponseEntity.ok(blogService.getUserBlogs(username, pageRequestDto));
     }
 
     @GetMapping(path = "{blogId}")

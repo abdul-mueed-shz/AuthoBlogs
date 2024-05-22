@@ -6,8 +6,11 @@ import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
 import com.bizremark.blogs.blog.model.entity.Blog;
 import com.bizremark.blogs.blog.model.repository.BlogJpaRepository;
 import com.bizremark.blogs.blog.model.repository.BlogRepository;
-import com.bizremark.blogs.user.info.LoggedInUserInfo;
+import com.bizremark.blogs.common.dto.PageRequestDto;
+import com.bizremark.blogs.common.service.PaginationHelper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,14 +21,16 @@ import java.util.Optional;
 public class BlogDao implements BlogRepository {
     private final BlogJpaRepository blogRepository;
     private final BlogInfoMapper blogInfoMapper;
+    private final PaginationHelper paginationHelper;
 
     public Boolean blogExists(Long id) {
         return blogRepository.existsById(id);
     }
 
-    public List<BlogResponse> getAllBlogs() {
-        List<Blog> blogList = blogRepository.findAll();
-        return blogInfoMapper.blogListToBlogResponseList(blogList);
+    public Page<BlogResponse> getAllBlogs(PageRequestDto pageRequestDto) {
+        Pageable pageable = paginationHelper.map(pageRequestDto);
+        Page<Blog> blogPage = blogRepository.findAll(pageable);
+        return paginationHelper.mapPageEntitiesToInfos(blogPage, blogInfoMapper::blogToBlogResponse);
     }
 
     public BlogResponse getBlog(Long id) {
@@ -33,9 +38,10 @@ public class BlogDao implements BlogRepository {
         return blog.map(blogInfoMapper::blogToBlogResponse).orElse(null);
     }
 
-    public List<BlogResponse> getUserBlogs(String username) {
-        List<Blog> blogList = blogRepository.getBlogsByUserUsername(username);
-        return blogInfoMapper.blogListToBlogResponseList(blogList);
+    public Page<BlogResponse> getUserBlogs(String username, PageRequestDto pageRequestDto) {
+        Pageable pageable = paginationHelper.map(pageRequestDto);
+        Page<Blog> blogPage = blogRepository.getBlogsByUserUsername(username, pageable);
+        return paginationHelper.mapPageEntitiesToInfos(blogPage, blogInfoMapper::blogToBlogResponse);
     }
 
     public Long createBlog(BlogInfo blogInfo) {
