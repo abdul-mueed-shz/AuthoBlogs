@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Abdul Mueed Shahbaz
+      changes:
+        - addColumn:
+            tableName: blog
+            columns:
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: blog
+            baseColumnNames: category_id
+            constraintName: fk_blog_category
+            referencedTableName: categories
+            referencedColumnNames: id

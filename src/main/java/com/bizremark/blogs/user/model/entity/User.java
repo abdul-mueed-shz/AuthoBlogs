@@ -1,13 +1,17 @@
 package com.bizremark.blogs.user.model.entity;
 
+import com.bizremark.blogs.blog.model.entity.Blog;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -24,9 +28,17 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String username;
+
+    @Getter(AccessLevel.NONE)
+    @ToString.Exclude
+    @JsonIgnore
     private String password;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Blog> blogs;
 
     @Override
     public String getPassword() {

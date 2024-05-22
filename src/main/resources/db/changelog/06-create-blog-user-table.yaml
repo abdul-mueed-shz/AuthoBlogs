@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: Abdul Mueed Shahbaz
+      changes:
+        - createSequence:
+            sequenceName: blog_user_seq
+        - createTable:
+            tableName: blog_user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValueSequenceNext: blog_user_seq
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: username
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: role
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

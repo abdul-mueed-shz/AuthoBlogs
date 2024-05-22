@@ -1,6 +1,7 @@
 package com.bizremark.blogs.blog.info;
 
 import com.bizremark.blogs.category.model.entity.Category;
+import com.bizremark.blogs.user.model.entity.User;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,4 +18,5 @@ public class BlogInfo {
     private Category category;
     private String absolutePath;
     private String thumbnailPath;
+    private User user;
 }

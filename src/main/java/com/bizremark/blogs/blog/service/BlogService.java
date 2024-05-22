@@ -5,6 +5,7 @@ import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
 import com.bizremark.blogs.blog.model.dao.BlogDao;
 import com.bizremark.blogs.category.model.dao.CategoryDao;
+import com.bizremark.blogs.user.info.LoggedInUserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.stereotype.Service;
@@ -68,9 +69,16 @@ public class BlogService {
     }
 
     @Transactional
-    public void deleteBlog(Long blogId) {
+    public void deleteBlog(Long blogId, LoggedInUserInfo loggedInUserInfo) {
         if (Boolean.FALSE.equals(blogDao.blogExists(blogId))) {
             throw new IllegalArgumentException("Blog with ID " + blogId + " does not exist");
+        }
+        boolean currentUserOwnsBlog =
+                getBlog(blogId).getUser().getId().equals(loggedInUserInfo.getId());
+        if (Boolean.FALSE.equals(currentUserOwnsBlog)) {
+            throw new IllegalArgumentException(
+                    "Blog with ID %d does not belong to the user %s".formatted(blogId, loggedInUserInfo.getUsername())
+            );
         }
         String absoluteThumbnailPath = blogDao.getAbsoluteFilePath(blogId);
         if (Boolean.TRUE.equals(handleThumbnailUploadService.deleteFile(absoluteThumbnailPath))) {

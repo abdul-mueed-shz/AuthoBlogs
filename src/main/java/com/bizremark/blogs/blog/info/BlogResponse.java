@@ -1,6 +1,7 @@
 package com.bizremark.blogs.blog.info;
 
 import com.bizremark.blogs.category.model.entity.Category;
+import com.bizremark.blogs.user.info.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ public class BlogResponse {
     private LocalDateTime modifiedOn;
     private Category category;
     private String thumbnailPath;
+    private UserResponse user;
 }

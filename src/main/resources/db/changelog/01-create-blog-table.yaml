@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Abdul Mueed Shahbaz
+      changes:
+        - createSequence:
+            sequenceName: blog_id_seq
+        - createTable:
+            tableName: blog
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValueSequenceNext: blog_id_seq
+              - column:
+                  name: title
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(5000)
+              - column:
+                  name: created_on
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_on
+                  type: timestamp

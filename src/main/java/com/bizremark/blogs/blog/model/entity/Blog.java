@@ -1,11 +1,13 @@
 package com.bizremark.blogs.blog.model.entity;
 
 import com.bizremark.blogs.category.model.entity.Category;
+import com.bizremark.blogs.user.model.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Setter
@@ -37,10 +39,14 @@ public class Blog {
     @JoinColumn(name = "category_id", nullable = false) // Foreign key
     private Category category;
 
-    @Column(name="absolute_thumbnail_path")
+    @Column(name = "absolute_thumbnail_path")
     private String absolutePath;
 
-    @Column(name="thumbnail_path")
+    @Column(name = "thumbnail_path")
     private String thumbnailPath;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
 
