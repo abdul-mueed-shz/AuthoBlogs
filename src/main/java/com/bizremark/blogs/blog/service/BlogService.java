@@ -30,6 +30,10 @@ public class BlogService {
         return blogDao.getAllBlogs();
     }
 
+    public List<BlogResponse> getUserBlogs(String username) {
+        return blogDao.getUserBlogs(username);
+    }
+
     public BlogResponse getBlog(Long blogId) {
         if (Boolean.FALSE.equals(blogDao.blogExists(blogId))) {
             throw new IllegalArgumentException("Blog with ID " + blogId + " does not exist");

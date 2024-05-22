@@ -1,5 +1,6 @@
 package com.bizremark.blogs.blog.controller;
 
+import com.bizremark.blogs.blog.constants.Endpoints;
 import com.bizremark.blogs.blog.dto.BlogDto;
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
@@ -28,6 +29,11 @@ public class BlogController {
     @GetMapping
     public ResponseEntity<List<BlogResponse>> getBlogs() {
         return ResponseEntity.ok(blogService.getBlogs());
+    }
+
+    @GetMapping(path = Endpoints.USER_BLOGS)
+    public ResponseEntity<List<BlogResponse>> getUserBlogs(@PathVariable("username") String username) {
+        return ResponseEntity.ok(blogService.getUserBlogs(username));
     }
 
     @GetMapping(path = "{blogId}")

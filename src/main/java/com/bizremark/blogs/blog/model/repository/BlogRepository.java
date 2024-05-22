@@ -10,6 +10,8 @@ public interface BlogRepository {
 
     List<BlogResponse> getAllBlogs();
 
+    List<BlogResponse> getUserBlogs(String username);
+    
     BlogResponse getBlog(Long id);
 
     Long createBlog(BlogInfo blogInfo);

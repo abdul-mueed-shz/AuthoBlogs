@@ -6,6 +6,7 @@ import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
 import com.bizremark.blogs.blog.model.entity.Blog;
 import com.bizremark.blogs.blog.model.repository.BlogJpaRepository;
 import com.bizremark.blogs.blog.model.repository.BlogRepository;
+import com.bizremark.blogs.user.info.LoggedInUserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,11 @@ public class BlogDao implements BlogRepository {
     public BlogResponse getBlog(Long id) {
         Optional<Blog> blog = blogRepository.findById(id);
         return blog.map(blogInfoMapper::blogToBlogResponse).orElse(null);
+    }
+
+    public List<BlogResponse> getUserBlogs(String username) {
+        List<Blog> blogList = blogRepository.getBlogsByUserUsername(username);
+        return blogInfoMapper.blogListToBlogResponseList(blogList);
     }
 
     public Long createBlog(BlogInfo blogInfo) {
