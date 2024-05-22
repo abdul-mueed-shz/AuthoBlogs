@@ -1,5 +1,6 @@
 package com.bizremark.blogs.blog.service;
 
+import com.bizremark.blogs.blog.dto.BlogFilterDto;
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
@@ -28,8 +29,8 @@ public class BlogService {
 
     private final HandleFileUpload handleThumbnailUploadService;
 
-    public Page<BlogResponse> getBlogs(PageRequestDto pageRequestDto) {
-        return blogDao.getAllBlogs(pageRequestDto);
+    public Page<BlogResponse> getBlogs(BlogFilterDto filterDto, PageRequestDto pageRequestDto) {
+        return blogDao.getAllBlogs(filterDto, pageRequestDto);
     }
 
     public Page<BlogResponse> getUserBlogs(String username, PageRequestDto pageRequestDto) {

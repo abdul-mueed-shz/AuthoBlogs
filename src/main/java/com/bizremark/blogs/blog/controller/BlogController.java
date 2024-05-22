@@ -2,6 +2,7 @@ package com.bizremark.blogs.blog.controller;
 
 import com.bizremark.blogs.blog.constants.Endpoints;
 import com.bizremark.blogs.blog.dto.BlogDto;
+import com.bizremark.blogs.blog.dto.BlogFilterDto;
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogDtoMapper;
@@ -29,8 +30,8 @@ public class BlogController {
     private final LoggedInUserMapper loggedInUserMapper;
 
     @GetMapping
-    public ResponseEntity<Page<BlogResponse>> getBlogs(PageRequestDto pageRequestDto) {
-        return ResponseEntity.ok(blogService.getBlogs(pageRequestDto));
+    public ResponseEntity<Page<BlogResponse>> getBlogs(BlogFilterDto filterDto, PageRequestDto pageRequestDto) {
+        return ResponseEntity.ok(blogService.getBlogs(filterDto, pageRequestDto));
     }
 
     @GetMapping(path = Endpoints.USER_BLOGS)

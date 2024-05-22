@@ -1,5 +1,7 @@
 package com.bizremark.blogs.blog.model.dao;
 
+import com.bizremark.blogs.blog.config.BlogSpecifications;
+import com.bizremark.blogs.blog.dto.BlogFilterDto;
 import com.bizremark.blogs.blog.info.BlogInfo;
 import com.bizremark.blogs.blog.info.BlogResponse;
 import com.bizremark.blogs.blog.mapper.BlogInfoMapper;
@@ -11,6 +13,7 @@ import com.bizremark.blogs.common.service.PaginationHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,9 +30,15 @@ public class BlogDao implements BlogRepository {
         return blogRepository.existsById(id);
     }
 
-    public Page<BlogResponse> getAllBlogs(PageRequestDto pageRequestDto) {
+    public Page<BlogResponse> getAllBlogs(BlogFilterDto filterDto, PageRequestDto pageRequestDto) {
         Pageable pageable = paginationHelper.map(pageRequestDto);
-        Page<Blog> blogPage = blogRepository.findAll(pageable);
+
+        Specification<Blog> specs = Specification
+                .where(BlogSpecifications.hasUsername(filterDto.getUsername()))
+                .and(BlogSpecifications.hasTitle(filterDto.getTitle()))
+                .and(BlogSpecifications.hasDescription(filterDto.getDescription()));
+
+        Page<Blog> blogPage = blogRepository.findAll(specs, pageable);
         return paginationHelper.mapPageEntitiesToInfos(blogPage, blogInfoMapper::blogToBlogResponse);
     }
 
