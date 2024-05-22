@@ -1,13 +1,14 @@
 server:
   port: 8092
 spring:
+  profiles:
+    active: ${APP_ACTIVE_PROFILE}
   application:
     name: blogs
   datasource:
-    url: jdbc:postgresql://localhost:5432/spring_blog
-    #    ?createDatabaseIfNotExist=true # Works for sql and some other databases
-    username: root
-    password: root
+    url: ${APP_DB_URL}
+    username: ${APP_DB_USERNAME}
+    password: ${APP_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -23,6 +24,10 @@ spring:
       enabled: true
 
 app:
+  jwt:
+    secret-key: ${APP_JWT_SECRET_KEY}
+    token-validity: ${APP_JWT_TOKEN_VALIDITY}
   upload:
-    base-folder: "public"
-    thumbnail-location: "uploads/thumbnails"
+    base-folder: public
+    thumbnail-location: uploads/thumbnails
+

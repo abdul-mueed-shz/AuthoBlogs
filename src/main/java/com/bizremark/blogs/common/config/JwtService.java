@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,10 @@ import java.util.function.Function;
 @Service
 @RequiredArgsConstructor
 public class JwtService {
-    // BUG: MOVE TO APPLICATION DEV
-    private static final String SECRET_KEY = "0459022f685c9af39d232c64d010892e406dfea4ec282e36d00512ce33401180";
-    // BUG: MOVE TO APPLICATION DEV
-    private static final Integer TOKEN_VALIDITY = 1000 * 60 * 24;
+    @Value("${app.jwt.secret-key}")
+    private String secretKey;
+    @Value("${app.jwt.token-validity}")
+    private Integer tokenValidity;
 
     private final UserInfoMapper userInfoMapper;
 
@@ -53,7 +54,7 @@ public class JwtService {
                 .subject(user.getUsername())
                 .claims(claims)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY))
+                .expiration(new Date(System.currentTimeMillis() + tokenValidity))
                 .signWith(getSignInKey())
                 .compact();
     }
@@ -72,7 +73,7 @@ public class JwtService {
     }
 
     private SecretKey getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_blog
+    username: root
+    password: root
+app:
+  jwt:
+    secret-key: "0459022f685c9af39d232c64d010892e406dfea4ec282e36d00512ce33401180"
+    token-validity: 1440000
