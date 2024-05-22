@@ -1,9 +1,12 @@
 package com.bizremark.blogs.category.model.repository;
 
-import com.bizremark.blogs.category.model.entity.Category;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.bizremark.blogs.category.dto.CategoryFilterDto;
+import com.bizremark.blogs.category.info.CategoryResponse;
+import com.bizremark.blogs.common.dto.PageRequestDto;
+import org.springframework.data.domain.Page;
 
-@Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository {
+    Page<CategoryResponse> getAllCategories(CategoryFilterDto categoryFilterDto, PageRequestDto pageRequestDto);
+
+    Boolean doesCategoryExist(Long id);
 }
